@@ -1,0 +1,63 @@
+To compile:
+  make
+
+To run:
+  ./multithreaded_p2p <port>
+
+Summary:
+  This program implements a client-server ping-pong application.
+  The main thread runs and spawns a server_thread, which simply
+  opens a socket to accept incomming client requests. For each
+  request that arrives, the server_thread swpans a
+  client_handle_thread that services the arrivng client request
+  and then closes the connection. This client handle thread
+  detaches from the server_thread since the beginning so it
+  does not keep waiting until the server_thread closes.
+
+  Meanwhile, the main thread continues its execution after the
+  server_thread is spawn and enters into the command line to
+  accept requests (prompt>). To communicate with another instance
+  of this multithreaded_p2p application, just type the following
+  command format:
+
+           send <hostname or IP address> <port>
+
+  for example:
+
+  prompt> send localhost 5000
+
+  Assuming that there is another instance running on localhost
+  and is leastening on port 5000. After that you should get
+  another prompt to type a message:
+
+  message> <type here your message>
+
+  for example:
+
+  message> hello world
+
+  The main thread spawns a client_thread that connects with the
+  remote server, delivers the message and waits to receive the
+  message back from the server_thread. This client_thread's
+  request is handled on the other end by the server_thread's
+  client_handle_thread rutine.
+
+  Once the client_thread is serviced, the connection is closed,
+  and so is the client_handle_thread on the server side. Both
+  threads are then reclaimed by the kernel since they are
+  detached from their respective threads that spawned them.
+
+  Besides the client_thread and the client_handler_thread, the
+  only two threads running are the main thread and
+  the server_thread; but since the server_thread is not detached
+  from the main thread, when the main thread exits with this
+  command
+
+  prompt> exit
+
+  Both threads are closed.
+
+  Try running several instances of this application on different
+  terminals. Make sure you use different port numbers so you
+  do not have problems running them.
+

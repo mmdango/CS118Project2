@@ -80,7 +80,8 @@ private:
   std::string m_trackerHost;
   std::string m_trackerPort;
   std::string m_trackerFile;
-
+  std::vector<PeerInfo>& peers;
+  
   uint16_t m_clientPort;
 
   int m_trackerSock;
