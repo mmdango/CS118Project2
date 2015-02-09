@@ -130,7 +130,7 @@ Client::connectTracker()
   struct sockaddr_in* ipv4 = (struct sockaddr_in*)res->ai_addr;
   char ipstr[INET_ADDRSTRLEN] = {'\0'};
   inet_ntop(res->ai_family, &(ipv4->sin_addr), ipstr, sizeof(ipstr));
-  // std::cout << "tracker address: " << ipstr << ":" << ntohs(ipv4->sin_port) << std::endl;
+  std::cout << "tracker address: " << ipstr << ":" << ntohs(ipv4->sin_port) << std::endl;
 
   if (connect(m_trackerSock, res->ai_addr, res->ai_addrlen) == -1) {
     perror("connect");
