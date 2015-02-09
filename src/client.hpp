@@ -24,6 +24,7 @@
 
 #include "common.hpp"
 #include "meta-info.hpp"
+#include "tracker-response.hpp"
 
 namespace sbt {
 
@@ -80,7 +81,7 @@ private:
   std::string m_trackerHost;
   std::string m_trackerPort;
   std::string m_trackerFile;
-  std::vector<PeerInfo>& peers;
+  std::vector<PeerInfo> peers;
   
   uint16_t m_clientPort;
 
