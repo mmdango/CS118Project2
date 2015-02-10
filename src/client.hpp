@@ -28,6 +28,11 @@
 
 namespace sbt {
 
+struct peer_args {
+  size_t port;               /* remote server port */
+  char ip[MAX_STR_LEN];      /* hostname of server */
+};
+
 class Client
 {
 public:

@@ -66,6 +66,11 @@ Client::run()
     sendTrackerRequest();
     m_isFirstReq = false;
     recvTrackerResponse();
+
+
+
+
+    
     close(m_trackerSock);
     sleep(m_interval);
   }
