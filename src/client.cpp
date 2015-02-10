@@ -405,7 +405,7 @@ void *Client::client_thread_peer(void *args)
   peerArgs = (struct peer_args*)args;
 
   //something like that... TODO
-  char * msg = reinterpret_cast<char *>((*hs.encode()).buf());
+  const char * msg = reinterpret_cast<char *>((*hs.encode()).buf());
   
   /* gethostbyname takes a string like "www.domainame.com" or "localhost" and
    returns a struct hostent with DNS information; see man pages */
