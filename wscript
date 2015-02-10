@@ -36,7 +36,7 @@ def configure(conf):
         boost_libs += ' unit_test_framework'
 
     conf.check_boost(lib=boost_libs)
-
+    conf.env.append_value('CFLAGS', ['lpthread'])
     conf.write_config_header('config.hpp')
 
 def build(bld):

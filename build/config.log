@@ -1,0 +1,451 @@
+# project SimpleBT (0.1) configured on Mon Feb  9 21:17:14 2015 by
+# waf 1.8.2 (abi 98, python 20706f0 on linux2)
+# using ./waf configure
+#
+----------------------------------------
+Setting top to
+/home/cs118/CS118Project2
+----------------------------------------
+Setting out to
+/home/cs118/CS118Project2/build
+----------------------------------------
+Checking for 'gcc' (C compiler)
+find program=['gcc', 'cc'] paths=['/usr/local/sbin', '/usr/local/bin', '/usr/sbin', '/usr/bin', '/sbin', '/bin', '/usr/games', '/usr/local/games'] var='CC' -> ['/usr/bin/gcc']
+find program=['ar'] paths=['/usr/local/sbin', '/usr/local/bin', '/usr/sbin', '/usr/bin', '/sbin', '/bin', '/usr/games', '/usr/local/games'] var='AR' -> ['/usr/bin/ar']
+/usr/bin/gcc
+----------------------------------------
+Checking for 'g++' (C++ compiler)
+find program=['g++', 'c++'] paths=['/usr/local/sbin', '/usr/local/bin', '/usr/sbin', '/usr/bin', '/sbin', '/bin', '/usr/games', '/usr/local/games'] var='CXX' -> ['/usr/bin/g++']
+(tool ar is already loaded, skipping)
+/usr/bin/g++
+----------------------------------------
+Checking supported CXXFLAGS
+==>
+
+int main(int argc, char **argv) {
+	(void)argc; (void)argv;
+	return 0;
+}
+
+<==
+[1/2] Compiling [32mbuild/.conf_check_c507b91b4e0c7615b0a46116f702a8a6/test.cpp[0m
+
+['/usr/bin/g++', '-Werror', '-std=c++0x', '../test.cpp', '-c', '-o', '/home/cs118/CS118Project2/build/.conf_check_c507b91b4e0c7615b0a46116f702a8a6/testbuild/test.cpp.1.o']
+[2/2] Linking [33mbuild/.conf_check_c507b91b4e0c7615b0a46116f702a8a6/testbuild/testprog[0m
+
+['/usr/bin/g++', 'test.cpp.1.o', '-o', '/home/cs118/CS118Project2/build/.conf_check_c507b91b4e0c7615b0a46116f702a8a6/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
+==>
+
+int main(int argc, char **argv) {
+	(void)argc; (void)argv;
+	return 0;
+}
+
+<==
+[1/2] Compiling [32mbuild/.conf_check_54754fb7f8b3153163a5d252bd9fb4dd/test.cpp[0m
+
+['/usr/bin/g++', '-Werror', '-std=c++11', '../test.cpp', '-c', '-o', '/home/cs118/CS118Project2/build/.conf_check_54754fb7f8b3153163a5d252bd9fb4dd/testbuild/test.cpp.1.o']
+[2/2] Linking [33mbuild/.conf_check_54754fb7f8b3153163a5d252bd9fb4dd/testbuild/testprog[0m
+
+['/usr/bin/g++', 'test.cpp.1.o', '-o', '/home/cs118/CS118Project2/build/.conf_check_54754fb7f8b3153163a5d252bd9fb4dd/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
+==>
+
+int main(int argc, char **argv) {
+	(void)argc; (void)argv;
+	return 0;
+}
+
+<==
+[1/2] Compiling [32mbuild/.conf_check_be9ad3b7189a0ee58a9838992af36b36/test.cpp[0m
+
+['/usr/bin/g++', '-Werror', '-stdlib=libc++', '../test.cpp', '-c', '-o', '/home/cs118/CS118Project2/build/.conf_check_be9ad3b7189a0ee58a9838992af36b36/testbuild/test.cpp.1.o']
+err: g++: error: unrecognized command line option ‘-stdlib=libc++’
+
+from /home/cs118/CS118Project2: Test does not build: Traceback (most recent call last):
+  File "/home/cs118/CS118Project2/.waf-1.8.2-a01aa13963437a19e5d8748cf2afd71b/waflib/Configure.py", line 337, in run_build
+    bld.compile()
+  File "/home/cs118/CS118Project2/.waf-1.8.2-a01aa13963437a19e5d8748cf2afd71b/waflib/Build.py", line 184, in compile
+    raise Errors.BuildError(self.producer.error)
+BuildError: Build failed
+ -> task in 'testprog' failed (exit status 1): 
+	{task 139692945364560: cxx test.cpp -> test.cpp.1.o}
+['/usr/bin/g++', '-Werror', '-stdlib=libc++', '../test.cpp', '-c', '-o', '/home/cs118/CS118Project2/build/.conf_check_be9ad3b7189a0ee58a9838992af36b36/testbuild/test.cpp.1.o']
+
+from /home/cs118/CS118Project2: The configuration failed
+==>
+
+int main(int argc, char **argv) {
+	(void)argc; (void)argv;
+	return 0;
+}
+
+<==
+[1/2] Compiling [32mbuild/.conf_check_89cf9f704f56c8aecd85ffd22486b968/test.cpp[0m
+
+['/usr/bin/g++', '-Werror', '-pedantic', '../test.cpp', '-c', '-o', '/home/cs118/CS118Project2/build/.conf_check_89cf9f704f56c8aecd85ffd22486b968/testbuild/test.cpp.1.o']
+[2/2] Linking [33mbuild/.conf_check_89cf9f704f56c8aecd85ffd22486b968/testbuild/testprog[0m
+
+['/usr/bin/g++', 'test.cpp.1.o', '-o', '/home/cs118/CS118Project2/build/.conf_check_89cf9f704f56c8aecd85ffd22486b968/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
+==>
+
+int main(int argc, char **argv) {
+	(void)argc; (void)argv;
+	return 0;
+}
+
+<==
+[1/2] Compiling [32mbuild/.conf_check_4256060146199d8821a1bde183a94c8b/test.cpp[0m
+
+['/usr/bin/g++', '-Werror', '-Wall', '../test.cpp', '-c', '-o', '/home/cs118/CS118Project2/build/.conf_check_4256060146199d8821a1bde183a94c8b/testbuild/test.cpp.1.o']
+[2/2] Linking [33mbuild/.conf_check_4256060146199d8821a1bde183a94c8b/testbuild/testprog[0m
+
+['/usr/bin/g++', 'test.cpp.1.o', '-o', '/home/cs118/CS118Project2/build/.conf_check_4256060146199d8821a1bde183a94c8b/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
+==>
+
+int main(int argc, char **argv) {
+	(void)argc; (void)argv;
+	return 0;
+}
+
+<==
+[1/2] Compiling [32mbuild/.conf_check_1aaef3c866f740d4dee689ff3859f536/test.cpp[0m
+
+['/usr/bin/g++', '-Werror', '-O2', '../test.cpp', '-c', '-o', '/home/cs118/CS118Project2/build/.conf_check_1aaef3c866f740d4dee689ff3859f536/testbuild/test.cpp.1.o']
+[2/2] Linking [33mbuild/.conf_check_1aaef3c866f740d4dee689ff3859f536/testbuild/testprog[0m
+
+['/usr/bin/g++', 'test.cpp.1.o', '-o', '/home/cs118/CS118Project2/build/.conf_check_1aaef3c866f740d4dee689ff3859f536/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
+==>
+
+int main(int argc, char **argv) {
+	(void)argc; (void)argv;
+	return 0;
+}
+
+<==
+[1/2] Compiling [32mbuild/.conf_check_78bf52953f3ec955617318d8827f37da/test.cpp[0m
+
+['/usr/bin/g++', '-Werror', '-g', '../test.cpp', '-c', '-o', '/home/cs118/CS118Project2/build/.conf_check_78bf52953f3ec955617318d8827f37da/testbuild/test.cpp.1.o']
+[2/2] Linking [33mbuild/.conf_check_78bf52953f3ec955617318d8827f37da/testbuild/testprog[0m
+
+['/usr/bin/g++', 'test.cpp.1.o', '-o', '/home/cs118/CS118Project2/build/.conf_check_78bf52953f3ec955617318d8827f37da/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
+-std=c++0x -std=c++11 -pedantic -Wall -O2 -g
+----------------------------------------
+Checking supported LINKFLAGS
+==>
+
+int main(int argc, char **argv) {
+	(void)argc; (void)argv;
+	return 0;
+}
+
+<==
+[1/2] Compiling [32mbuild/.conf_check_f7382c34270f60b03b98a1c62dce3b0e/test.cpp[0m
+
+['/usr/bin/g++', '-std=c++0x', '-std=c++11', '-pedantic', '-Wall', '-O2', '-g', '../test.cpp', '-c', '-o', '/home/cs118/CS118Project2/build/.conf_check_f7382c34270f60b03b98a1c62dce3b0e/testbuild/test.cpp.1.o']
+[2/2] Linking [33mbuild/.conf_check_f7382c34270f60b03b98a1c62dce3b0e/testbuild/testprog[0m
+
+['/usr/bin/g++', '-Werror', '-stdlib=libc++', 'test.cpp.1.o', '-o', '/home/cs118/CS118Project2/build/.conf_check_f7382c34270f60b03b98a1c62dce3b0e/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
+err: g++: error: unrecognized command line option ‘-stdlib=libc++’
+
+from /home/cs118/CS118Project2: Test does not build: Traceback (most recent call last):
+  File "/home/cs118/CS118Project2/.waf-1.8.2-a01aa13963437a19e5d8748cf2afd71b/waflib/Configure.py", line 337, in run_build
+    bld.compile()
+  File "/home/cs118/CS118Project2/.waf-1.8.2-a01aa13963437a19e5d8748cf2afd71b/waflib/Build.py", line 184, in compile
+    raise Errors.BuildError(self.producer.error)
+BuildError: Build failed
+ -> task in 'testprog' failed (exit status 1): 
+	{task 139692945009552: cxxprogram test.cpp.1.o -> testprog}
+['/usr/bin/g++', '-Werror', '-stdlib=libc++', 'test.cpp.1.o', '-o', '/home/cs118/CS118Project2/build/.conf_check_f7382c34270f60b03b98a1c62dce3b0e/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
+
+from /home/cs118/CS118Project2: The configuration failed
+------------------------------------------
+Checking for std::is_default_constructible
+==>
+#include <type_traits>
+static_assert(std::is_default_constructible<int>::value, "");
+<==
+[1/1] Compiling [32mbuild/.conf_check_bd2e387cafd6dbb7fb306f1c7447748b/test.cpp[0m
+
+['/usr/bin/g++', '-std=c++0x', '-std=c++11', '-pedantic', '-Wall', '-O2', '-g', '../test.cpp', '-c', '-o', '/home/cs118/CS118Project2/build/.conf_check_bd2e387cafd6dbb7fb306f1c7447748b/testbuild/test.cpp.1.o']
+yes
+------------------------------------------
+Checking for std::is_move_constructible
+==>
+#include <type_traits>
+static_assert(std::is_move_constructible<int>::value, "");
+<==
+[1/1] Compiling [32mbuild/.conf_check_6f425b7a48c461fe74b6c2632b97bf3d/test.cpp[0m
+
+['/usr/bin/g++', '-std=c++0x', '-std=c++11', '-pedantic', '-Wall', '-O2', '-g', '-DHAVE_IS_DEFAULT_CONSTRUCTIBLE=1', '../test.cpp', '-c', '-o', '/home/cs118/CS118Project2/build/.conf_check_6f425b7a48c461fe74b6c2632b97bf3d/testbuild/test.cpp.1.o']
+yes
+------------------------------------------
+Checking for std::is_move_assignable
+==>
+#include <type_traits>
+static_assert(std::is_move_assignable<int>::value, "");
+<==
+[1/1] Compiling [32mbuild/.conf_check_f23d31017250f8f186d359edb9d9ac2b/test.cpp[0m
+
+['/usr/bin/g++', '-std=c++0x', '-std=c++11', '-pedantic', '-Wall', '-O2', '-g', '-DHAVE_IS_DEFAULT_CONSTRUCTIBLE=1', '-DHAVE_IS_MOVE_CONSTRUCTIBLE=1', '../test.cpp', '-c', '-o', '/home/cs118/CS118Project2/build/.conf_check_f23d31017250f8f186d359edb9d9ac2b/testbuild/test.cpp.1.o']
+yes
+------------------------------------------
+Checking for header string.h
+==>
+#include <string.h>
+
+int main(int argc, char **argv) {
+	(void)argc; (void)argv;
+	return 0;
+}
+
+<==
+[1/2] Compiling [32mbuild/.conf_check_25e1027af346af3abfda73626624b500/test.cpp[0m
+
+['/usr/bin/g++', '-std=c++0x', '-std=c++11', '-pedantic', '-Wall', '-O2', '-g', '-DHAVE_IS_DEFAULT_CONSTRUCTIBLE=1', '-DHAVE_IS_MOVE_CONSTRUCTIBLE=1', '-DHAVE_IS_MOVE_ASSIGNABLE=1', '../test.cpp', '-c', '-o', '/home/cs118/CS118Project2/build/.conf_check_25e1027af346af3abfda73626624b500/testbuild/test.cpp.1.o']
+[2/2] Linking [33mbuild/.conf_check_25e1027af346af3abfda73626624b500/testbuild/testprog[0m
+
+['/usr/bin/g++', 'test.cpp.1.o', '-o', '/home/cs118/CS118Project2/build/.conf_check_25e1027af346af3abfda73626624b500/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
+yes
+------------------------------------------
+Checking for function memmem
+==>
+#include <string.h>
+
+int main(int argc, char **argv) {
+	void *p;
+	(void)argc; (void)argv;
+	p=(void*)(memmem);
+	return 0;
+}
+
+<==
+[1/2] Compiling [32mbuild/.conf_check_e1e70e769957f8e6e02f3df21328431a/test.cpp[0m
+
+['/usr/bin/g++', '-std=c++0x', '-std=c++11', '-pedantic', '-Wall', '-O2', '-g', '-DHAVE_IS_DEFAULT_CONSTRUCTIBLE=1', '-DHAVE_IS_MOVE_CONSTRUCTIBLE=1', '-DHAVE_IS_MOVE_ASSIGNABLE=1', '-DHAVE_STRING_H=1', '../test.cpp', '-c', '-o', '/home/cs118/CS118Project2/build/.conf_check_e1e70e769957f8e6e02f3df21328431a/testbuild/test.cpp.1.o']
+err: ../test.cpp: In function ‘int main(int, char**)’:
+../test.cpp:6:18: warning: ISO C++ forbids casting between pointer-to-function and pointer-to-object [enabled by default]
+  p=(void*)(memmem);
+                  ^
+../test.cpp:4:8: warning: variable ‘p’ set but not used [-Wunused-but-set-variable]
+  void *p;
+        ^
+
+[2/2] Linking [33mbuild/.conf_check_e1e70e769957f8e6e02f3df21328431a/testbuild/testprog[0m
+
+['/usr/bin/g++', 'test.cpp.1.o', '-o', '/home/cs118/CS118Project2/build/.conf_check_e1e70e769957f8e6e02f3df21328431a/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
+yes
+------------------------------------------
+Checking for function stpncpy
+==>
+#include <string.h>
+
+int main(int argc, char **argv) {
+	void *p;
+	(void)argc; (void)argv;
+	p=(void*)(stpncpy);
+	return 0;
+}
+
+<==
+[1/2] Compiling [32mbuild/.conf_check_073d1110e67ab0390d6b7a3288866e1b/test.cpp[0m
+
+['/usr/bin/g++', '-std=c++0x', '-std=c++11', '-pedantic', '-Wall', '-O2', '-g', '-DHAVE_IS_DEFAULT_CONSTRUCTIBLE=1', '-DHAVE_IS_MOVE_CONSTRUCTIBLE=1', '-DHAVE_IS_MOVE_ASSIGNABLE=1', '-DHAVE_STRING_H=1', '-DHAVE_MEMMEM=1', '../test.cpp', '-c', '-o', '/home/cs118/CS118Project2/build/.conf_check_073d1110e67ab0390d6b7a3288866e1b/testbuild/test.cpp.1.o']
+err: ../test.cpp: In function ‘int main(int, char**)’:
+../test.cpp:6:19: warning: ISO C++ forbids casting between pointer-to-function and pointer-to-object [enabled by default]
+  p=(void*)(stpncpy);
+                   ^
+../test.cpp:4:8: warning: variable ‘p’ set but not used [-Wunused-but-set-variable]
+  void *p;
+        ^
+
+[2/2] Linking [33mbuild/.conf_check_073d1110e67ab0390d6b7a3288866e1b/testbuild/testprog[0m
+
+['/usr/bin/g++', 'test.cpp.1.o', '-o', '/home/cs118/CS118Project2/build/.conf_check_073d1110e67ab0390d6b7a3288866e1b/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
+yes
+------------------------------------------
+Checking for library pthread
+==>
+
+int main(int argc, char **argv) {
+	(void)argc; (void)argv;
+	return 0;
+}
+
+<==
+[1/2] Compiling [32mbuild/.conf_check_d7bf3504c0d18e59c9b1cd18057308f7/test.cpp[0m
+
+['/usr/bin/g++', '-std=c++0x', '-std=c++11', '-pedantic', '-Wall', '-O2', '-g', '-DHAVE_IS_DEFAULT_CONSTRUCTIBLE=1', '-DHAVE_IS_MOVE_CONSTRUCTIBLE=1', '-DHAVE_IS_MOVE_ASSIGNABLE=1', '-DHAVE_STRING_H=1', '-DHAVE_MEMMEM=1', '-DHAVE_STPNCPY=1', '../test.cpp', '-c', '-o', '/home/cs118/CS118Project2/build/.conf_check_d7bf3504c0d18e59c9b1cd18057308f7/testbuild/test.cpp.1.o']
+[2/2] Linking [33mbuild/.conf_check_d7bf3504c0d18e59c9b1cd18057308f7/testbuild/testprog[0m
+
+['/usr/bin/g++', 'test.cpp.1.o', '-o', '/home/cs118/CS118Project2/build/.conf_check_d7bf3504c0d18e59c9b1cd18057308f7/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic', '-lpthread']
+yes
+------------------------------------------
+Checking Crypto++ lib
+561
+------------------------------------------
+Checking if CryptoPP library works
+==>
+#include <cryptopp/config.h>
+
+int main(int argc, char **argv) {
+	(void)argc; (void)argv;
+	return 0;
+}
+
+<==
+[1/2] Compiling [32mbuild/.conf_check_15c4ede80508e8f682d65ad868e1bacb/test.cpp[0m
+
+['/usr/bin/g++', '-std=c++0x', '-std=c++11', '-pedantic', '-Wall', '-O2', '-g', '-I/usr/include', '-DHAVE_IS_DEFAULT_CONSTRUCTIBLE=1', '-DHAVE_IS_MOVE_CONSTRUCTIBLE=1', '-DHAVE_IS_MOVE_ASSIGNABLE=1', '-DHAVE_STRING_H=1', '-DHAVE_MEMMEM=1', '-DHAVE_STPNCPY=1', '-DHAVE_PTHREAD=1', '../test.cpp', '-c', '-o', '/home/cs118/CS118Project2/build/.conf_check_15c4ede80508e8f682d65ad868e1bacb/testbuild/test.cpp.1.o']
+[2/2] Linking [33mbuild/.conf_check_15c4ede80508e8f682d65ad868e1bacb/testbuild/testprog[0m
+
+['/usr/bin/g++', 'test.cpp.1.o', '-o', '/home/cs118/CS118Project2/build/.conf_check_15c4ede80508e8f682d65ad868e1bacb/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic', '-L/usr/lib', '-lcryptopp', '-lpthread']
+yes
+------------------------------------------
+Checking boost includes
+1.54.0
+------------------------------------------
+Checking boost libs
+Found the boost path in /usr/lib/x86_64-linux-gnu with the libraries:
+    /usr/lib/x86_64-linux-gnu/libboost_atomic.a
+    /usr/lib/x86_64-linux-gnu/libboost_atomic.so
+    /usr/lib/x86_64-linux-gnu/libboost_atomic.so.1.54.0
+    /usr/lib/x86_64-linux-gnu/libboost_chrono.a
+    /usr/lib/x86_64-linux-gnu/libboost_chrono.so
+    /usr/lib/x86_64-linux-gnu/libboost_chrono.so.1.54.0
+    /usr/lib/x86_64-linux-gnu/libboost_context.a
+    /usr/lib/x86_64-linux-gnu/libboost_context.so
+    /usr/lib/x86_64-linux-gnu/libboost_context.so.1.54.0
+    /usr/lib/x86_64-linux-gnu/libboost_coroutine.a
+    /usr/lib/x86_64-linux-gnu/libboost_date_time.a
+    /usr/lib/x86_64-linux-gnu/libboost_date_time.so
+    /usr/lib/x86_64-linux-gnu/libboost_date_time.so.1.54.0
+    /usr/lib/x86_64-linux-gnu/libboost_exception.a
+    /usr/lib/x86_64-linux-gnu/libboost_filesystem.a
+    /usr/lib/x86_64-linux-gnu/libboost_filesystem.so
+    /usr/lib/x86_64-linux-gnu/libboost_filesystem.so.1.54.0
+    /usr/lib/x86_64-linux-gnu/libboost_graph.a
+    /usr/lib/x86_64-linux-gnu/libboost_graph.so
+    /usr/lib/x86_64-linux-gnu/libboost_graph.so.1.54.0
+    /usr/lib/x86_64-linux-gnu/libboost_graph_parallel.a
+    /usr/lib/x86_64-linux-gnu/libboost_graph_parallel.so
+    /usr/lib/x86_64-linux-gnu/libboost_graph_parallel.so.1.54.0
+    /usr/lib/x86_64-linux-gnu/libboost_iostreams.a
+    /usr/lib/x86_64-linux-gnu/libboost_iostreams.so
+    /usr/lib/x86_64-linux-gnu/libboost_iostreams.so.1.54.0
+    /usr/lib/x86_64-linux-gnu/libboost_locale.a
+    /usr/lib/x86_64-linux-gnu/libboost_locale.so
+    /usr/lib/x86_64-linux-gnu/libboost_locale.so.1.54.0
+    /usr/lib/x86_64-linux-gnu/libboost_log.a
+    /usr/lib/x86_64-linux-gnu/libboost_log.so
+    /usr/lib/x86_64-linux-gnu/libboost_log.so.1.54.0
+    /usr/lib/x86_64-linux-gnu/libboost_log_setup.a
+    /usr/lib/x86_64-linux-gnu/libboost_log_setup.so
+    /usr/lib/x86_64-linux-gnu/libboost_log_setup.so.1.54.0
+    /usr/lib/x86_64-linux-gnu/libboost_math_c99.a
+    /usr/lib/x86_64-linux-gnu/libboost_math_c99.so
+    /usr/lib/x86_64-linux-gnu/libboost_math_c99.so.1.54.0
+    /usr/lib/x86_64-linux-gnu/libboost_math_c99f.a
+    /usr/lib/x86_64-linux-gnu/libboost_math_c99f.so
+    /usr/lib/x86_64-linux-gnu/libboost_math_c99f.so.1.54.0
+    /usr/lib/x86_64-linux-gnu/libboost_math_c99l.a
+    /usr/lib/x86_64-linux-gnu/libboost_math_c99l.so
+    /usr/lib/x86_64-linux-gnu/libboost_math_c99l.so.1.54.0
+    /usr/lib/x86_64-linux-gnu/libboost_math_tr1.a
+    /usr/lib/x86_64-linux-gnu/libboost_math_tr1.so
+    /usr/lib/x86_64-linux-gnu/libboost_math_tr1.so.1.54.0
+    /usr/lib/x86_64-linux-gnu/libboost_math_tr1f.a
+    /usr/lib/x86_64-linux-gnu/libboost_math_tr1f.so
+    /usr/lib/x86_64-linux-gnu/libboost_math_tr1f.so.1.54.0
+    /usr/lib/x86_64-linux-gnu/libboost_math_tr1l.a
+    /usr/lib/x86_64-linux-gnu/libboost_math_tr1l.so
+    /usr/lib/x86_64-linux-gnu/libboost_math_tr1l.so.1.54.0
+    /usr/lib/x86_64-linux-gnu/libboost_mpi.a
+    /usr/lib/x86_64-linux-gnu/libboost_mpi.so
+    /usr/lib/x86_64-linux-gnu/libboost_mpi.so.1.54.0
+    /usr/lib/x86_64-linux-gnu/libboost_mpi_python-py27.a
+    /usr/lib/x86_64-linux-gnu/libboost_mpi_python-py27.so
+    /usr/lib/x86_64-linux-gnu/libboost_mpi_python-py27.so.1.54.0
+    /usr/lib/x86_64-linux-gnu/libboost_mpi_python-py34.a
+    /usr/lib/x86_64-linux-gnu/libboost_mpi_python-py34.so
+    /usr/lib/x86_64-linux-gnu/libboost_mpi_python-py34.so.1.54.0
+    /usr/lib/x86_64-linux-gnu/libboost_mpi_python.a
+    /usr/lib/x86_64-linux-gnu/libboost_mpi_python.so
+    /usr/lib/x86_64-linux-gnu/libboost_prg_exec_monitor.a
+    /usr/lib/x86_64-linux-gnu/libboost_prg_exec_monitor.so
+    /usr/lib/x86_64-linux-gnu/libboost_prg_exec_monitor.so.1.54.0
+    /usr/lib/x86_64-linux-gnu/libboost_program_options.a
+    /usr/lib/x86_64-linux-gnu/libboost_program_options.so
+    /usr/lib/x86_64-linux-gnu/libboost_program_options.so.1.54.0
+    /usr/lib/x86_64-linux-gnu/libboost_python-py27.a
+    /usr/lib/x86_64-linux-gnu/libboost_python-py27.so
+    /usr/lib/x86_64-linux-gnu/libboost_python-py27.so.1.54.0
+    /usr/lib/x86_64-linux-gnu/libboost_python-py34.a
+    /usr/lib/x86_64-linux-gnu/libboost_python-py34.so
+    /usr/lib/x86_64-linux-gnu/libboost_python-py34.so.1.54.0
+    /usr/lib/x86_64-linux-gnu/libboost_python.a
+    /usr/lib/x86_64-linux-gnu/libboost_python.so
+    /usr/lib/x86_64-linux-gnu/libboost_random.a
+    /usr/lib/x86_64-linux-gnu/libboost_random.so
+    /usr/lib/x86_64-linux-gnu/libboost_random.so.1.54.0
+    /usr/lib/x86_64-linux-gnu/libboost_regex.a
+    /usr/lib/x86_64-linux-gnu/libboost_regex.so
+    /usr/lib/x86_64-linux-gnu/libboost_regex.so.1.54.0
+    /usr/lib/x86_64-linux-gnu/libboost_serialization.a
+    /usr/lib/x86_64-linux-gnu/libboost_serialization.so
+    /usr/lib/x86_64-linux-gnu/libboost_serialization.so.1.54.0
+    /usr/lib/x86_64-linux-gnu/libboost_signals.a
+    /usr/lib/x86_64-linux-gnu/libboost_signals.so
+    /usr/lib/x86_64-linux-gnu/libboost_signals.so.1.54.0
+    /usr/lib/x86_64-linux-gnu/libboost_system.a
+    /usr/lib/x86_64-linux-gnu/libboost_system.so
+    /usr/lib/x86_64-linux-gnu/libboost_system.so.1.54.0
+    /usr/lib/x86_64-linux-gnu/libboost_test_exec_monitor.a
+    /usr/lib/x86_64-linux-gnu/libboost_thread.a
+    /usr/lib/x86_64-linux-gnu/libboost_thread.so
+    /usr/lib/x86_64-linux-gnu/libboost_thread.so.1.54.0
+    /usr/lib/x86_64-linux-gnu/libboost_timer.a
+    /usr/lib/x86_64-linux-gnu/libboost_timer.so
+    /usr/lib/x86_64-linux-gnu/libboost_timer.so.1.54.0
+    /usr/lib/x86_64-linux-gnu/libboost_unit_test_framework.a
+    /usr/lib/x86_64-linux-gnu/libboost_unit_test_framework.so
+    /usr/lib/x86_64-linux-gnu/libboost_unit_test_framework.so.1.54.0
+    /usr/lib/x86_64-linux-gnu/libboost_wave.a
+    /usr/lib/x86_64-linux-gnu/libboost_wave.so
+    /usr/lib/x86_64-linux-gnu/libboost_wave.so.1.54.0
+    /usr/lib/x86_64-linux-gnu/libboost_wserialization.a
+    /usr/lib/x86_64-linux-gnu/libboost_wserialization.so
+    /usr/lib/x86_64-linux-gnu/libboost_wserialization.so.1.54.0
+Trying pattern boost_system(-gcc[0-9]{0,3})+(-1_54)+
+Trying pattern boost_system(-1_54)+
+Trying pattern boost_system(-1_54)+
+Trying pattern boost_system(-gcc[0-9]{0,3})+
+Trying pattern boost_system
+Found boost lib libboost_system.a
+Trying pattern boost_iostreams(-gcc[0-9]{0,3})+(-1_54)+
+Trying pattern boost_iostreams(-1_54)+
+Trying pattern boost_iostreams(-1_54)+
+Trying pattern boost_iostreams(-gcc[0-9]{0,3})+
+Trying pattern boost_iostreams
+Found boost lib libboost_iostreams.a
+Trying pattern boost_filesystem(-gcc[0-9]{0,3})+(-1_54)+
+Trying pattern boost_filesystem(-1_54)+
+Trying pattern boost_filesystem(-1_54)+
+Trying pattern boost_filesystem(-gcc[0-9]{0,3})+
+Trying pattern boost_filesystem
+Found boost lib libboost_filesystem.a
+ok
+------------------------------------------
+Checking for boost linkage
+==>
+
+#include <boost/system/error_code.hpp>
+int main() { boost::system::error_code c; }
+
+<==
+[1/2] Compiling [32mbuild/.conf_check_2e3874f2036441c6ad74841b0a90dbce/test.cpp[0m
+
+['/usr/bin/g++', '-std=c++0x', '-std=c++11', '-pedantic', '-Wall', '-O2', '-g', '-I/usr/include', '-DHAVE_IS_DEFAULT_CONSTRUCTIBLE=1', '-DHAVE_IS_MOVE_CONSTRUCTIBLE=1', '-DHAVE_IS_MOVE_ASSIGNABLE=1', '-DHAVE_STRING_H=1', '-DHAVE_MEMMEM=1', '-DHAVE_STPNCPY=1', '-DHAVE_PTHREAD=1', '-DHAVE_CRYPTOPP_CONFIG_H=1', '../test.cpp', '-c', '-o', '/home/cs118/CS118Project2/build/.conf_check_2e3874f2036441c6ad74841b0a90dbce/testbuild/test.cpp.1.o']
+[2/2] Linking [33mbuild/.conf_check_2e3874f2036441c6ad74841b0a90dbce/testbuild/testprog[0m
+
+['/usr/bin/g++', 'test.cpp.1.o', '-o', '/home/cs118/CS118Project2/build/.conf_check_2e3874f2036441c6ad74841b0a90dbce/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic', '-L/usr/lib/x86_64-linux-gnu', '-lboost_system', '-lboost_iostreams', '-lboost_filesystem']
+ok

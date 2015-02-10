@@ -17,6 +17,8 @@
 
 #include "client_thread.hpp"
 #include "errors.hpp"
+#include "msg/msg-base.hpp"
+#include "msg/handshake.hpp"
 
 void *client_thread(void *args)
 {
@@ -104,12 +106,13 @@ void *client_thread_peer(void *args)
   char buf[MAX_BUF_LEN];        /* buffer for transmission */
   unsigned int len;             /* length of the data to transmit */
   unsigned int bytesRcvd;       /* bytes read in single recv() call */
-  unsigned int totalBytesRcvd;  /* total bytes read */
   struct hostent *server;       /* dns information of the server host */
   struct client_args *clntArgs; /* client thread arguments */
   struct peer_args *peerArgs;
   int status;                   /* for pthread returns */
-  
+  sbt::msg::HandShake hs(m_metaInfo.getHash(), "SIMPLEBT-TEST-PEERID");
+  sbt::msg::HandShake received_hs;
+
   /* Detach this thread from the main thread */
   status = pthread_detach(pthread_self());
   if(status != 0)
@@ -121,13 +124,12 @@ void *client_thread_peer(void *args)
     fprintf(stderr, "Client: invalid arguments\n");
     exit(EXIT_FAILURE);
   }
-  peerArgs = (struct peer_args*)args;
+  peerArgs = (struct *peer_args)args;
   clntArgs = (*client_args) malloc(sizeof(client_args));
   clntArgs->port = peerArgs->port;
   clntArgs->hostname = peerArgs->ip;
 
   //something like that... TODO
-  Handshake hs(m_metaInfo.getHash(), "SIMPLEBT-TEST-PEERID");
   clntArgs->msg = (char *) hs.encode().data();
   
   /* gethostbyname takes a string like "www.domainame.com" or "localhost" and
@@ -169,14 +171,13 @@ void *client_thread_peer(void *args)
   if((bytesRcvd=recv(sock, buf, MAX_BUF_LEN-1, 0)) <= 0)
     err_message("recv() failed or connection closed prematurely");
   
-  Handshake received_hs;
   received_hs.decode(buf);
 
   printf("peerId:" + received_hs.getPeerId());  /* final line feed */
   
 
   //SEND BITFIELD
-  Bitfield bf;
+  //Bitfield bf;
   //bf.setPayload()
 
 
