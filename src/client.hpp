@@ -41,8 +41,7 @@ struct client_args
   char msg[MAX_STR_LEN];           /* data to transfer */
 };
 
-void *client_thread(void *args);
-void *client_thread_peer(void *args);
+
 
 class Client
 {
@@ -78,6 +77,9 @@ public:
   getTrackerFile() {
     return m_trackerFile;
   }
+
+  void *client_thread(void *args);
+  void *client_thread_peer(void *args);
 
 private:
   void

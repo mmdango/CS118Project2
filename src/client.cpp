@@ -299,7 +299,7 @@ Client::recvTrackerResponse()
 }
 
 
-void *client_thread(void *args)
+void *Client::client_thread(void *args)
 {
   int sock;                     /* socket descriptor */
   struct sockaddr_in servAddr;  /* remote server address */
@@ -378,7 +378,7 @@ void *client_thread(void *args)
   return NULL;
 }
 
-void *client_thread_peer(void *args)
+void *Client::client_thread_peer(void *args)
 {
   int sock;                     /* socket descriptor */
   struct sockaddr_in servAddr;  /* remote server address */
