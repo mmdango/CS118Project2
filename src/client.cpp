@@ -20,13 +20,13 @@
  */
 
 #include "client.hpp"
-#include "client_thread.h"
-#include "server_thread.h"
+#include "client_thread.hpp"
+#include "server_thread.hpp"
 #include "tracker-request-param.hpp"
 #include "tracker-response.hpp"
 #include "http/http-request.hpp"
 #include "http/http-response.hpp"
-#include "errors.h" 
+#include "errors.hpp" 
 #include <fstream>
 #include <boost/tokenizer.hpp>
 #include <boost/lexical_cast.hpp>
