@@ -299,7 +299,7 @@ Client::recvTrackerResponse()
 }
 
 
-static void *Client::client_thread(void *args)
+void *Client::client_thread(void *args)
 {
   int sock;                     /* socket descriptor */
   struct sockaddr_in servAddr;  /* remote server address */
@@ -378,7 +378,7 @@ static void *Client::client_thread(void *args)
   return NULL;
 }
 
-static void *Client::client_thread_peer(void *args)
+void *Client::client_thread_peer(void *args)
 {
   int sock;                     /* socket descriptor */
   struct sockaddr_in servAddr;  /* remote server address */
@@ -409,7 +409,7 @@ static void *Client::client_thread_peer(void *args)
   memcpy(clntArgs->hostname, peerArgs->ip, sizeof(clntArgs->hostname));
 
   //something like that... TODO
-  clntArgs->msg = (char *) hs.encode().buf();
+  clntArgs->msg = (char *) hs.encode();
   
   /* gethostbyname takes a string like "www.domainame.com" or "localhost" and
    returns a struct hostent with DNS information; see man pages */

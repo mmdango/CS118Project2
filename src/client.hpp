@@ -94,7 +94,7 @@ private:
   recvTrackerResponse();
 
 private:
-  MetaInfo m_metaInfo;
+  static MetaInfo m_metaInfo;
   std::string m_trackerHost;
   std::string m_trackerPort;
   std::string m_trackerFile;
