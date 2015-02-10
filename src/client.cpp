@@ -436,10 +436,10 @@ void *Client::client_thread_peer(void *args)
     err_message("connect() failed");
   
   /* Determine the data length */
-  len = strlen(clntArgs->msg);
+  len = strlen(msg);
   
   /* Send the data to the server */
-  if(send(sock, clntArgs->msg, len, 0) != len)
+  if(send(sock, msg, len, 0) != len)
     err_message("send() failed");
 
   //RECEIVE HANDSHAKE HERE
@@ -450,7 +450,7 @@ void *Client::client_thread_peer(void *args)
   if((bytesRcvd=recv(sock, buf, MAX_BUF_LEN-1, 0)) <= 0)
     err_message("recv() failed or connection closed prematurely");
   
-  ConstBufferPtr c_buf = std::make_shared<char *>(buf);
+  BufferPtr buf_ptr = std::make_shared<char *>(buf);
   received_hs.decode(c_buf);
 
   printf("peerId:%s",received_hs.getPeerId().c_str());  /* final line feed */
