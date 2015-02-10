@@ -25,6 +25,8 @@
 #include "tracker-response.hpp"
 #include "http/http-request.hpp"
 #include "http/http-response.hpp"
+#include "msg/msg-base.hpp"
+#include "msg/handshake.hpp"
 #include "errors.hpp" 
 #include <fstream>
 #include <boost/tokenizer.hpp>
