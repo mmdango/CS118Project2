@@ -20,6 +20,7 @@
  */
 
 #include "client.hpp"
+#include "client_thread.h"
 #include "tracker-request-param.hpp"
 #include "tracker-response.hpp"
 #include "http/http-request.hpp"
@@ -68,9 +69,52 @@ Client::run()
     recvTrackerResponse();
 
 
+  char line[MAX_STR_LEN];        /* command line */
+  char *p;                       /* char pointer to search within line */
+  int port;                      /* server port */
+  int status;                    /* for pthread returns */
+  pthread_t server, client;      /* server and client threads */
+  struct server_args *servArgs;  /* server thread arguments */
+  struct client_args *clntArgs;  /* client thread arguments */
+  
+  /* parameter testing */
+  if(argc != 2)
+  {
+    fprintf(stderr, "Usage: %s <port>\n", argv[0]);
+    exit(EXIT_FAILURE);
+  }
+  port = atoi(argv[1]);
+  if(port < 1024)
+  {
+    fprintf(stderr, "Invalid port number");
+    exit(EXIT_FAILURE);
+  }
+  
+  /* Start the server thread */
+  servArgs = (struct server_args *)malloc(sizeof(struct server_args));
+  servArgs->port = m_clientPort;
+  servArgs->max_pending = 5;
+  status = pthread_create(&server, NULL, server_thread, servArgs);
+  if(status != 0)
+    err_abort(status, "Server thread");
+  sleep(1);
+  
+  /*
+   * Initiate a client transmission of data
+   */
+  for (auto i = m_peers.begin(); i != m_peers.end(); i++) {
 
+      /* get client thread arguments */
+      clntArgs = (struct client_args *)malloc(sizeof(struct client_args));
+      clntArgs->port = i->port;
+      clntArgs->hostname = i->ip;
+      
+      /* spawn new client thread */
+      status = pthread_create(&client, NULL, client_thread_peer, clntArgs);
+      if(status != 0)
+        err_abort(status, "Client thread");
+    }
 
-    
     close(m_trackerSock);
     sleep(m_interval);
   }
