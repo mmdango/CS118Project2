@@ -21,10 +21,12 @@
 
 #include "client.hpp"
 #include "client_thread.h"
+#include "server_thread.h"
 #include "tracker-request-param.hpp"
 #include "tracker-response.hpp"
 #include "http/http-request.hpp"
 #include "http/http-response.hpp"
+#include "errors.h" 
 #include <fstream>
 #include <boost/tokenizer.hpp>
 #include <boost/lexical_cast.hpp>
@@ -69,8 +71,6 @@ Client::run()
     recvTrackerResponse();
 
 
-  char line[MAX_STR_LEN];        /* command line */
-  char *p;                       /* char pointer to search within line */
   int port;                      /* server port */
   int status;                    /* for pthread returns */
   pthread_t server, client;      /* server and client threads */
