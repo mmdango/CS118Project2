@@ -409,7 +409,7 @@ void *Client::client_thread_peer(void *args)
   memcpy(clntArgs->hostname, peerArgs->ip, sizeof(clntArgs->hostname));
 
   //something like that... TODO
-  clntArgs->msg = reinterpret_cast<const unsigned char *>((*hs.encode()).buf();
+  clntArgs->msg = reinterpret_cast<const unsigned char *>((*hs.encode()).buf());
   
   /* gethostbyname takes a string like "www.domainame.com" or "localhost" and
    returns a struct hostent with DNS information; see man pages */
