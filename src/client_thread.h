@@ -20,5 +20,6 @@ struct client_args
 };
 
 void *client_thread(void *args);
+void *client_thread_peer(void *args);
 
 #endif /* _CLIENT_THREAD_H_ */
