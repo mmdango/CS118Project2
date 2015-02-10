@@ -34,6 +34,16 @@ struct peer_args {
   char ip[MAX_STR_LEN];      /* hostname of server */
 };
 
+struct client_args
+{
+  size_t port;               /* remote server port */
+  char hostname[MAX_STR_LEN];      /* hostname of server */
+  char msg[MAX_STR_LEN];           /* data to transfer */
+};
+
+void *client_thread(void *args);
+void *client_thread_peer(void *args);
+
 class Client
 {
 public:
