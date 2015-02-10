@@ -25,6 +25,7 @@
 #include "common.hpp"
 #include "meta-info.hpp"
 #include "tracker-response.hpp"
+#include "resources.h"
 
 namespace sbt {
 
