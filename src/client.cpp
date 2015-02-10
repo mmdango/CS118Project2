@@ -387,8 +387,8 @@ void *client_thread_peer(void *args)
   struct client_args *clntArgs; /* client thread arguments */
   struct peer_args *peerArgs;
   int status;                   /* for pthread returns */
-  sbt::msg::HandShake hs(m_metaInfo.getHash(), "SIMPLEBT-TEST-PEERID");
-  sbt::msg::HandShake received_hs;
+  msg::HandShake hs(m_metaInfo.getHash(), "SIMPLEBT-TEST-PEERID");
+  msg::HandShake received_hs;
 
   /* Detach this thread from the main thread */
   status = pthread_detach(pthread_self());
