@@ -386,6 +386,7 @@ void *Client::client_thread_peer(void *args)
   unsigned int len;             /* length of the data to transmit */
   unsigned int bytesRcvd;       /* bytes read in single recv() call */
   struct hostent *server;       /* dns information of the server host */
+  struct client_args *clntArgs; /* client thread arguments */
   struct peer_args *peerArgs;
   int status;                   /* for pthread returns */
   msg::HandShake hs(m_metaInfo.getHash(), "SIMPLEBT-TEST-PEERID");
@@ -403,13 +404,16 @@ void *Client::client_thread_peer(void *args)
     exit(EXIT_FAILURE);
   }
   peerArgs = (struct peer_args*)args;
+  clntArgs = (client_args*) malloc(sizeof(client_args));
+  clntArgs->port = peerArgs->port;
+  memcpy(clntArgs->hostname, peerArgs->ip, sizeof(clntArgs->hostname));
 
   //something like that... TODO
-  const char * msg = reinterpret_cast<char *>((*hs.encode()).buf());
+  clntArgs->msg = reinterpret_cast<char *>(hs.encode());
   
   /* gethostbyname takes a string like "www.domainame.com" or "localhost" and
    returns a struct hostent with DNS information; see man pages */
-  server = gethostbyname(peerArgs->ip);
+  server = gethostbyname(clntArgs->hostname);
   if(server == NULL)
     err_message("gethostbyname: could not find host");
   
@@ -424,7 +428,7 @@ void *Client::client_thread_peer(void *args)
           (char *)server->h_addr,
           server->h_length);                     /* server IP address */
   servAddr.sin_family = AF_INET;                 /* Internet addr family */
-  servAddr.sin_port   = htons(peerArgs->port);   /* server port */
+  servAddr.sin_port   = htons(clntArgs->port);   /* server port */
 
   
   /* Establish the connection to the echo server */
@@ -432,10 +436,10 @@ void *Client::client_thread_peer(void *args)
     err_message("connect() failed");
   
   /* Determine the data length */
-  len = strlen(msg);
+  len = strlen(clntArgs->msg);
   
   /* Send the data to the server */
-  if(send(sock, msg, len, 0) != len)
+  if(send(sock, clntArgs->msg, len, 0) != len)
     err_message("send() failed");
 
   //RECEIVE HANDSHAKE HERE
@@ -446,7 +450,7 @@ void *Client::client_thread_peer(void *args)
   if((bytesRcvd=recv(sock, buf, MAX_BUF_LEN-1, 0)) <= 0)
     err_message("recv() failed or connection closed prematurely");
   
-  ConstBufferPtr c_buf = std::make_shared<Buffer>(buf);
+  ConstBufferPtr c_buf = std::make_shared<char *>(buf);
   received_hs.decode(c_buf);
 
   printf("peerId:%s",received_hs.getPeerId().c_str());  /* final line feed */
@@ -457,6 +461,7 @@ void *Client::client_thread_peer(void *args)
   //bf.setPayload()
 
 
+  free(clntArgs);
   close(sock);
   
   return NULL;
