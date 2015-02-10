@@ -9,7 +9,7 @@
 #ifndef _CLIENT_THREAD_H_
 #define _CLIENT_THREAD_H_
 
-#include "resources.h"
+#include "resources.hpp"
 
 
 struct client_args

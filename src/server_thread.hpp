@@ -9,7 +9,7 @@
 #ifndef _SERVER_THREAD_H_
 #define _SERVER_THREAD_H_
 
-#include "resources.h"
+#include "resources.hpp"
 
 
 struct server_args

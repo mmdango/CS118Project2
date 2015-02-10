@@ -15,8 +15,8 @@
 #include <netdb.h>       /* for gethostbyname() */
 #include <pthread.h>     /* for pthread_create() */
 
-#include "client_thread.h"
-#include "errors.h"
+#include "client_thread.hpp"
+#include "errors.hpp"
 
 void *client_thread(void *args)
 {

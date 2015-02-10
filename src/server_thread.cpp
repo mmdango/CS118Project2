@@ -11,8 +11,8 @@
 #include <arpa/inet.h>
 #include <pthread.h>
 
-#include "server_thread.h"
-#include "errors.h"
+#include "server_thread.hpp"
+#include "errors.hpp"
 
 
 struct client_handle_args
