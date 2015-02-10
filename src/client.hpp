@@ -37,7 +37,7 @@ struct peer_args {
 struct client_args
 {
   size_t port;               /* remote server port */
-  char hostname[MAX_STR_LEN];      /* hostname of server */
+  const char hostname[MAX_STR_LEN];      /* hostname of server */
   char msg[MAX_STR_LEN];           /* data to transfer */
 };
 
