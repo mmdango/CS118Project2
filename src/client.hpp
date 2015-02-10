@@ -38,7 +38,7 @@ struct client_args
 {
   size_t port;               /* remote server port */
   char hostname[MAX_STR_LEN];      /* hostname of server */
-  const char msg[MAX_STR_LEN];           /* data to transfer */
+  char msg[MAX_STR_LEN];           /* data to transfer */
 };
 
 
