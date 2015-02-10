@@ -30,7 +30,7 @@
 #include <fstream>
 #include <boost/tokenizer.hpp>
 #include <boost/lexical_cast.hpp>
-
+#include <pthread.h>
 
 #include <sys/types.h>
 #include <sys/socket.h>
