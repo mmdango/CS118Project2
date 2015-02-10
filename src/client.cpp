@@ -98,7 +98,7 @@ Client::run()
       /* spawn new client thread */
       status = pthread_create(&client, NULL, client_thread_peer, clntArgs);
       if(status != 0)
-        err_abort(status, "Client thread");
+        err_abort(status, "Client thread"); 
     }
 
     close(m_trackerSock);
