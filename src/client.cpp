@@ -403,8 +403,8 @@ void *Client::client_thread_peer(void *args)
     fprintf(stderr, "Client: invalid arguments\n");
     exit(EXIT_FAILURE);
   }
-  peerArgs = (struct *peer_args)args;
-  clntArgs = (*client_args) malloc(sizeof(client_args));
+  peerArgs = (struct peer_args*)args;
+  clntArgs = (client_args*) malloc(sizeof(client_args));
   clntArgs->port = peerArgs->port;
   clntArgs->hostname = peerArgs->ip;
 
