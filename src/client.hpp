@@ -41,6 +41,8 @@ struct client_args
   char msg[MAX_STR_LEN];           /* data to transfer */
 };
 
+void *client_thread(void *args);
+void *client_thread_peer(void *args);
 
 
 class Client
@@ -78,8 +80,7 @@ public:
     return m_trackerFile;
   }
 
-  void *client_thread(void *args);
-  void *client_thread_peer(void *args);
+
 
 private:
   void
@@ -99,7 +100,7 @@ private:
   std::string m_trackerHost;
   std::string m_trackerPort;
   std::string m_trackerFile;
-  std::vector<PeerInfo> m_peers;
+  static std::vector<PeerInfo> m_peers;
   
   uint16_t m_clientPort;
 

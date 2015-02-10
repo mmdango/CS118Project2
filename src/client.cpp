@@ -299,7 +299,7 @@ Client::recvTrackerResponse()
 }
 
 
-void *Client::client_thread(void *args)
+static void *Client::client_thread(void *args)
 {
   int sock;                     /* socket descriptor */
   struct sockaddr_in servAddr;  /* remote server address */
@@ -378,7 +378,7 @@ void *Client::client_thread(void *args)
   return NULL;
 }
 
-void *Client::client_thread_peer(void *args)
+static void *Client::client_thread_peer(void *args)
 {
   int sock;                     /* socket descriptor */
   struct sockaddr_in servAddr;  /* remote server address */
@@ -406,10 +406,10 @@ void *Client::client_thread_peer(void *args)
   peerArgs = (struct peer_args*)args;
   clntArgs = (client_args*) malloc(sizeof(client_args));
   clntArgs->port = peerArgs->port;
-  clntArgs->hostname = peerArgs->ip;
+  memcpy(clntArgs->hostname, peerArgs->ip, sizeof(clntArgs->hostname));
 
   //something like that... TODO
-  clntArgs->msg = (char *) hs.encode().data();
+  clntArgs->msg = (char *) hs.encode().buf();
   
   /* gethostbyname takes a string like "www.domainame.com" or "localhost" and
    returns a struct hostent with DNS information; see man pages */
@@ -450,9 +450,10 @@ void *Client::client_thread_peer(void *args)
   if((bytesRcvd=recv(sock, buf, MAX_BUF_LEN-1, 0)) <= 0)
     err_message("recv() failed or connection closed prematurely");
   
-  received_hs.decode(buf);
+  ConstBufferPtr c_buf = Buffer(buf, sizeof(buf));
+  received_hs.decode(c_buf);
 
-  printf("peerId:" + received_hs.getPeerId());  /* final line feed */
+  printf("peerId:%s",received_hs.getPeerId());  /* final line feed */
   
 
   //SEND BITFIELD
