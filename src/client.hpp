@@ -87,7 +87,7 @@ private:
   std::string m_trackerHost;
   std::string m_trackerPort;
   std::string m_trackerFile;
-  std::vector<PeerInfo> peers;
+  std::vector<PeerInfo> m_peers;
   
   uint16_t m_clientPort;
 

@@ -77,19 +77,6 @@ Client::run()
   struct server_args *servArgs;  /* server thread arguments */
   struct client_args *clntArgs;  /* client thread arguments */
   
-  /* parameter testing */
-  if(argc != 2)
-  {
-    fprintf(stderr, "Usage: %s <port>\n", argv[0]);
-    exit(EXIT_FAILURE);
-  }
-  port = atoi(argv[1]);
-  if(port < 1024)
-  {
-    fprintf(stderr, "Invalid port number");
-    exit(EXIT_FAILURE);
-  }
-  
   /* Start the server thread */
   servArgs = (struct server_args *)malloc(sizeof(struct server_args));
   servArgs->port = m_clientPort;
