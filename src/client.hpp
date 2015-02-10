@@ -77,8 +77,8 @@ public:
     return m_trackerFile;
   }
 
-void *client_thread(void *args);
-void *client_thread_peer(void *args);
+  static void *client_thread(void *args);
+  static void *client_thread_peer(void *args);
 
 private:
   void
