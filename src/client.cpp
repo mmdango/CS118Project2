@@ -409,7 +409,7 @@ void *Client::client_thread_peer(void *args)
   memcpy(clntArgs->hostname, peerArgs->ip, sizeof(clntArgs->hostname));
 
   //something like that... TODO
-  clntArgs->msg = (char *) hs.encode();
+  clntArgs->msg = reinterpret_cast<char *> hs.encode();
   
   /* gethostbyname takes a string like "www.domainame.com" or "localhost" and
    returns a struct hostent with DNS information; see man pages */
@@ -450,10 +450,10 @@ void *Client::client_thread_peer(void *args)
   if((bytesRcvd=recv(sock, buf, MAX_BUF_LEN-1, 0)) <= 0)
     err_message("recv() failed or connection closed prematurely");
   
-  ConstBufferPtr c_buf = Buffer(buf, sizeof(buf));
+  ConstBufferPtr c_buf = std::make_shared<char *>(buf);
   received_hs.decode(c_buf);
 
-  printf("peerId:%s",received_hs.getPeerId());  /* final line feed */
+  printf("peerId:%s",received_hs.getPeerId().c_str());  /* final line feed */
   
 
   //SEND BITFIELD
