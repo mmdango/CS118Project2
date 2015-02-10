@@ -71,7 +71,6 @@ Client::run()
     recvTrackerResponse();
 
 
-  int port;                      /* server port */
   int status;                    /* for pthread returns */
   pthread_t server, client;      /* server and client threads */
   struct server_args *servArgs;  /* server thread arguments */
@@ -94,7 +93,7 @@ Client::run()
       /* get client thread arguments */
       clntArgs = (struct client_args *)malloc(sizeof(struct client_args));
       clntArgs->port = i->port;
-      clntArgs->hostname = i->ip;
+      clntArgs->hostname = i->ip.c_str();
       
       /* spawn new client thread */
       status = pthread_create(&client, NULL, client_thread_peer, clntArgs);
