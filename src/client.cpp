@@ -83,9 +83,9 @@ Client::run()
   struct client_args *clntArgs;  /* client thread arguments */
   
   /* Start the server thread */
-  servArgs = (struct server_args *)malloc(sizeof(struct server_args));
-  servArgs->port = m_clientPort;
-  servArgs->max_pending = 5;
+  //servArgs = (struct server_args *)malloc(sizeof(struct server_args));
+  //servArgs->port = m_clientPort;
+  //servArgs->max_pending = 5;
   printf("got here");
   //status = pthread_create(&server, NULL, server_thread, servArgs);
   //if(status != 0)
