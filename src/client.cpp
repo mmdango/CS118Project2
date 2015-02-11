@@ -56,6 +56,8 @@ Client::Client(const std::string& port, const std::string& torrent)
 {
   srand(time(NULL));
 
+  MetaInfo Client::m_metaInfo;
+  std::vector<PeerInfo> Client::m_peers;
   m_clientPort = boost::lexical_cast<uint16_t>(port);
 
   loadMetaInfo(torrent);
