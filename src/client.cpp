@@ -118,7 +118,7 @@ Client::loadMetaInfo(const std::string& torrent)
 {
   std::ifstream is(torrent);
   m_metaInfo.wireDecode(is);
-
+  printf("got here?");
   std::string announce = m_metaInfo.getAnnounce();
   std::string url;
   std::string defaultPort;
