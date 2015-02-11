@@ -112,6 +112,9 @@ private:
   bool m_isFirstRes;
 };
 
+  MetaInfo Client::m_metaInfo;
+  std::vector<PeerInfo> Client::m_peers;
+
 } // namespace sbt
 
 #endif // SBT_CLIENT_HPP
