@@ -98,7 +98,7 @@ Client::run()
       /* get client thread arguments */
       clntArgs = (struct client_args *)malloc(sizeof(struct client_args));
       clntArgs->port = i->port;
-      memcpy(clntArgs->hostname, i->ip.c_str(), sizeof(*i->ip.c_str()));
+      memcpy(clntArgs->hostname, i->ip.c_str(), sizeof(*(i->ip.c_str())));
       
       /* spawn new client thread */
       status = pthread_create(&client, NULL, client_thread_peer, clntArgs);
