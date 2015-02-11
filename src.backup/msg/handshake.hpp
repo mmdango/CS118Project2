@@ -19,80 +19,68 @@
  * \author Yingdi Yu <yingdi@cs.ucla.edu>
  */
 
-#ifndef SBT_CLIENT_HPP
-#define SBT_CLIENT_HPP
+#ifndef SBT_MSG_HANDSHAKE_HPP
+#define SBT_MSG_HANDSHAKE_HPP
 
-#include "common.hpp"
-#include "meta-info.hpp"
+#include "msg-base.hpp"
+#include <string>
 
 namespace sbt {
+namespace msg {
 
-class Client
+class HandShake
 {
 public:
-  class Error : public std::runtime_error
+  HandShake();
+
+  HandShake(ConstBufferPtr infoHash, std::string peerId);
+
+  void
+  setInfoHash(ConstBufferPtr infoHash)
   {
-  public:
-    explicit
-    Error(const std::string& what)
-      : std::runtime_error(what)
-    {
-    }
-  };
+    m_infoHash = infoHash;
+  }
 
-public:
-  Client(const std::string& port,
-         const std::string& torrent);
+  ConstBufferPtr
+  getInfoHash()
+  {
+    return m_infoHash;
+  }
 
   void
-  run();
-
-  const std::string&
-  getTrackerHost() {
-    return m_trackerHost;
+  setPeerId(std::string peerId)
+  {
+    m_peerId = peerId;
   }
 
   const std::string&
-  getTrackerPort() {
-    return m_trackerPort;
+  getPeerId()
+  {
+    return m_peerId;
   }
 
-  const std::string&
-  getTrackerFile() {
-    return m_trackerFile;
-  }
+  ConstBufferPtr
+  encode();
+
+  void
+  decode(ConstBufferPtr msg);
 
 private:
-  void
-  loadMetaInfo(const std::string& torrent);
+  static const size_t HANDSHAKE_LENGTH;
+  static const uint8_t PSTR_LENGTH;
+  static const std::string PSTR;
+  static const Buffer RESERVED;
 
-  void
-  connectTracker();
+  static const size_t INFOHASH_OFFSET;
+  static const size_t INFOHASH_LENGTH;
+  static const size_t PEERID_OFFSET;
+  static const size_t PEERID_LENGTH;
 
-  void
-  sendTrackerRequest();
-
-  void
-  recvTrackerResponse();
-
-private:
-  MetaInfo m_metaInfo;
-  std::string m_trackerHost;
-  std::string m_trackerPort;
-  std::string m_trackerFile;
-
-  uint16_t m_clientPort;
-
-  int m_trackerSock;
-  int m_serverSock = -1;
-
-  fd_set m_readSocks;
-
-  uint64_t m_interval;
-  bool m_isFirstReq;
-  bool m_isFirstRes;
+  ConstBufferPtr m_infoHash;
+  std::string m_peerId;
 };
 
+} // namespace msg
 } // namespace sbt
 
-#endif // SBT_CLIENT_HPP
+#endif // SBT_MSG_HANDSHAKE_HPP

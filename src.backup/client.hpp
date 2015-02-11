@@ -24,8 +24,23 @@
 
 #include "common.hpp"
 #include "meta-info.hpp"
+#include "tracker-response.hpp"
+#include "resources.hpp"
 
 namespace sbt {
+
+struct peer_args {
+  size_t port;               /* remote server port */
+  char ip[MAX_STR_LEN];      /* hostname of server */
+};
+
+struct client_args
+{
+  size_t port;               /* remote server port */
+  char hostname[MAX_STR_LEN];      /* hostname of server */
+  char msg[MAX_STR_LEN];           /* data to transfer */
+};
+
 
 class Client
 {
@@ -62,6 +77,12 @@ public:
     return m_trackerFile;
   }
 
+  static void *client_thread(void *args);
+  static void *client_thread_peer(void *args);
+
+  static MetaInfo m_metaInfo;
+  static std::vector<PeerInfo> m_peers;
+
 private:
   void
   loadMetaInfo(const std::string& torrent);
@@ -75,12 +96,12 @@ private:
   void
   recvTrackerResponse();
 
+
 private:
-  MetaInfo m_metaInfo;
   std::string m_trackerHost;
   std::string m_trackerPort;
   std::string m_trackerFile;
-
+  
   uint16_t m_clientPort;
 
   int m_trackerSock;

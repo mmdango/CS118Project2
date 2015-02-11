@@ -20,25 +20,20 @@
  */
 
 #include "client.hpp"
-#include "server_thread.hpp"
 #include "tracker-request-param.hpp"
 #include "tracker-response.hpp"
 #include "http/http-request.hpp"
 #include "http/http-response.hpp"
-#include "msg/msg-base.hpp"
-#include "msg/handshake.hpp"
-#include "errors.hpp" 
 #include <fstream>
 #include <boost/tokenizer.hpp>
 #include <boost/lexical_cast.hpp>
-#include <pthread.h>
+
 
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <netdb.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
-#include <stdlib.h>      /* for atoi() */
 #include <string.h>
 #include <stdio.h>
 #include <errno.h>
@@ -48,9 +43,6 @@
 
 
 namespace sbt {
-
-  MetaInfo Client::m_metaInfo;
-  std::vector<PeerInfo> Client::m_peers;
 
 Client::Client(const std::string& port, const std::string& torrent)
   : m_interval(3600)
@@ -74,40 +66,6 @@ Client::run()
     sendTrackerRequest();
     m_isFirstReq = false;
     recvTrackerResponse();
-  printf("got here");
-
-
-  int status;                    /* for pthread returns */
-  pthread_t server, client;      /* server and client threads */
-  struct server_args *servArgs;  /* server thread arguments */
-  struct client_args *clntArgs;  /* client thread arguments */
-  
-  /* Start the server thread */
-  //servArgs = (struct server_args *)malloc(sizeof(struct server_args));
-  //servArgs->port = m_clientPort;
-  //servArgs->max_pending = 5;
-  printf("got here");
-  //status = pthread_create(&server, NULL, server_thread, servArgs);
-  //if(status != 0)
-  //  err_abort(status, "Server thread");
-  sleep(1);
-  
-  /*
-   * Initiate a client transmission of data
-   *
-  for (auto i = m_peers.begin(); i != m_peers.end(); i++) {
-
-      // get client thread arguments 
-      clntArgs = (struct client_args *)malloc(sizeof(struct client_args));
-      clntArgs->port = i->port;
-      memcpy(clntArgs->hostname, i->ip.c_str(), sizeof(*(i->ip.c_str())));
-      
-      //spawn new client thread 
-      status = pthread_create(&client, NULL, client_thread_peer, clntArgs);
-      if(status != 0)
-        err_abort(status, "Client thread"); 
-    }
-*/
     close(m_trackerSock);
     sleep(m_interval);
   }
@@ -118,7 +76,7 @@ Client::loadMetaInfo(const std::string& torrent)
 {
   std::ifstream is(torrent);
   m_metaInfo.wireDecode(is);
-  printf("got here?");
+
   std::string announce = m_metaInfo.getAnnounce();
   std::string url;
   std::string defaultPort;
@@ -172,7 +130,7 @@ Client::connectTracker()
   struct sockaddr_in* ipv4 = (struct sockaddr_in*)res->ai_addr;
   char ipstr[INET_ADDRSTRLEN] = {'\0'};
   inet_ntop(res->ai_family, &(ipv4->sin_addr), ipstr, sizeof(ipstr));
-  std::cout << "tracker address: " << ipstr << ":" << ntohs(ipv4->sin_port) << std::endl;
+  // std::cout << "tracker address: " << ipstr << ":" << ntohs(ipv4->sin_port) << std::endl;
 
   if (connect(m_trackerSock, res->ai_addr, res->ai_addrlen) == -1) {
     perror("connect");
@@ -188,7 +146,7 @@ Client::sendTrackerRequest()
   TrackerRequestParam param;
 
   param.setInfoHash(m_metaInfo.getHash());
-  param.setPeerId("SIMPLEBT-TEST-PEERID"); //TODO:
+  param.setPeerId("01234567890123456789"); //TODO:
   param.setIp("127.0.0.1"); //TODO:
   param.setPort(m_clientPort); //TODO:
   param.setUploaded(100); //TODO:
@@ -291,185 +249,16 @@ Client::recvTrackerResponse()
 
   TrackerResponse trackerResponse;
   trackerResponse.decode(dict);
-  m_peers = trackerResponse.getPeers();
+  const std::vector<PeerInfo>& peers = trackerResponse.getPeers();
   m_interval = trackerResponse.getInterval();
 
   if (m_isFirstRes) {
-    for (const auto& peer : m_peers) {
+    for (const auto& peer : peers) {
       std::cout << peer.ip << ":" << peer.port << std::endl;
     }
   }
 
   m_isFirstRes = false;
-}
-
-
-void *Client::client_thread(void *args)
-{
-  int sock;                     /* socket descriptor */
-  struct sockaddr_in servAddr;  /* remote server address */
-  char buf[MAX_BUF_LEN];        /* buffer for transmission */
-  unsigned int len;             /* length of the data to transmit */
-  unsigned int bytesRcvd;       /* bytes read in single recv() call */
-  unsigned int totalBytesRcvd;  /* total bytes read */
-  struct hostent *server;       /* dns information of the server host */
-  struct client_args *clntArgs; /* client thread arguments */
-  int status;                   /* for pthread returns */
-  
-  /* Detach this thread from the main thread */
-  status = pthread_detach(pthread_self());
-  if(status != 0)
-    err_abort(status, "Detach thread");
-  
-  /* Get the server arguments */
-  if(args == NULL)
-  {
-    fprintf(stderr, "Client: invalid arguments\n");
-    exit(EXIT_FAILURE);
-  }
-  clntArgs = (struct client_args*)args;
-  
-  /* gethostbyname takes a string like "www.domainame.com" or "localhost" and
-   returns a struct hostent with DNS information; see man pages */
-  server = gethostbyname(clntArgs->hostname);
-  if(server == NULL)
-    err_message("gethostbyname: could not find host");
-  
-  /* Create a reliable, stream socket using TCP */
-  sock = socket(PF_INET, SOCK_STREAM, IPPROTO_TCP);
-  if(sock < 0)
-    err_message("socket() failed");
-
-  /* Construct the server address structure */
-  memset(&servAddr, 0x00, sizeof(servAddr));     /* clear the struct */
-  memmove((char *) &servAddr.sin_addr.s_addr,
-          (char *)server->h_addr,
-          server->h_length);                     /* server IP address */
-  servAddr.sin_family = AF_INET;                 /* Internet addr family */
-  servAddr.sin_port   = htons(clntArgs->port);   /* server port */
-
-  
-  /* Establish the connection to the echo server */
-  if(connect(sock, (struct sockaddr *) &servAddr, sizeof(servAddr)) < 0)
-    err_message("connect() failed");
-  
-  /* Determine the data length */
-  len = strlen(clntArgs->msg);
-  
-  /* Send the data to the server */
-  if(send(sock, clntArgs->msg, len, 0) != len)
-    err_message("send() failed");
-
-  //RECEIVE RESPONSE HERE
-  //TODO: should be piece size?
-  totalBytesRcvd = 0;
-  printf("[%s:%u]: ", inet_ntoa(servAddr.sin_addr), ntohs(servAddr.sin_port));
-  while(totalBytesRcvd < len)
-  {
-    /* Receive up to the buffer size (minum one to leave space for a null
-     terminator) bytes from the sender */
-    if((bytesRcvd=recv(sock, buf, MAX_BUF_LEN-1, 0)) <= 0)
-      err_message("recv() failed or connection closed prematurely");
-    
-    totalBytesRcvd += bytesRcvd;  /* keep tally of total bytes */
-    buf[bytesRcvd] = 0;           /* terminate the c-string */
-    printf("%s", buf);            /* print the buffer */
-  }
-  printf("\n");  /* final line feed */
-  
-  free(clntArgs);
-  close(sock);
-  
-  return NULL;
-}
-
-void *Client::client_thread_peer(void *args)
-{
-  int sock;                     /* socket descriptor */
-  struct sockaddr_in servAddr;  /* remote server address */
-  char buf[MAX_BUF_LEN];        /* buffer for transmission */
-  unsigned int len;             /* length of the data to transmit */
-  unsigned int bytesRcvd;       /* bytes read in single recv() call */
-  struct hostent *server;       /* dns information of the server host */
-  struct client_args *clntArgs; /* client thread arguments */
-  struct peer_args *peerArgs;
-  int status;                   /* for pthread returns */
-  msg::HandShake hs(m_metaInfo.getHash(), "SIMPLEBT-TEST-PEERID");
-  msg::HandShake received_hs;
-
-  /* Detach this thread from the main thread */
-  status = pthread_detach(pthread_self());
-  if(status != 0)
-    err_abort(status, "Detach thread");
-  
-  /* Get the server arguments */
-  if(args == NULL)
-  {
-    fprintf(stderr, "Client: invalid arguments\n");
-    exit(EXIT_FAILURE);
-  }
-  peerArgs = (struct peer_args*)args;
-  clntArgs = (client_args*) malloc(sizeof(client_args));
-  clntArgs->port = peerArgs->port;
-  memcpy(clntArgs->hostname, peerArgs->ip, sizeof(clntArgs->hostname));
-
-  //something like that... TODO
-  const char * msg = reinterpret_cast<const char *>((*hs.encode()).get());
-  
-  /* gethostbyname takes a string like "www.domainame.com" or "localhost" and
-   returns a struct hostent with DNS information; see man pages */
-  server = gethostbyname(clntArgs->hostname);
-  if(server == NULL)
-    err_message("gethostbyname: could not find host");
-  
-  /* Create a reliable, stream socket using TCP */
-  sock = socket(PF_INET, SOCK_STREAM, IPPROTO_TCP);
-  if(sock < 0)
-    err_message("socket() failed");
-
-  /* Construct the server address structure */
-  memset(&servAddr, 0x00, sizeof(servAddr));     /* clear the struct */
-  memmove((char *) &servAddr.sin_addr.s_addr,
-          (char *)server->h_addr,
-          server->h_length);                     /* server IP address */
-  servAddr.sin_family = AF_INET;                 /* Internet addr family */
-  servAddr.sin_port   = htons(clntArgs->port);   /* server port */
-
-  
-  /* Establish the connection to the echo server */
-  if(connect(sock, (struct sockaddr *) &servAddr, sizeof(servAddr)) < 0)
-    err_message("connect() failed");
-  
-  /* Determine the data length */
-  len = strlen(msg);
-  
-  /* Send the data to the server */
-  if(send(sock, msg, len, 0) != len)
-    err_message("send() failed");
-
-  //RECEIVE HANDSHAKE HERE
-  //TODO: should be piece size?
-
-  /* Receive up to the buffer size (minum one to leave space for a null
-   terminator) bytes from the sender */
-  if((bytesRcvd=recv(sock, buf, MAX_BUF_LEN-1, 0)) <= 0)
-    err_message("recv() failed or connection closed prematurely");
-  
-  //BufferPtr buf_ptr = std::make_shared<sbt::Buffer>(buf);
-  //received_hs.decode(buf_ptr);
-
-  printf("peerId:%s",received_hs.getPeerId().c_str());  /* final line feed */
-  
-
-  //SEND BITFIELD
-  //Bitfield bf;
-  //bf.setPayload()
-
-
-  free(clntArgs);
-  close(sock);
-  
-  return NULL;
 }
 
 } // namespace sbt
