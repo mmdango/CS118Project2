@@ -85,6 +85,7 @@ Client::run()
   servArgs = (struct server_args *)malloc(sizeof(struct server_args));
   servArgs->port = m_clientPort;
   servArgs->max_pending = 5;
+  printf("got here");
   status = pthread_create(&server, NULL, server_thread, servArgs);
   if(status != 0)
     err_abort(status, "Server thread");
@@ -453,8 +454,8 @@ void *Client::client_thread_peer(void *args)
   if((bytesRcvd=recv(sock, buf, MAX_BUF_LEN-1, 0)) <= 0)
     err_message("recv() failed or connection closed prematurely");
   
-  //BufferPtr buf_ptr = std::make_shared<sbt::Buffer>(buf);
-  //received_hs.decode(buf_ptr);
+  BufferPtr buf_ptr = std::make_shared<sbt::Buffer>(buf);
+  received_hs.decode(buf_ptr);
 
   printf("peerId:%s",received_hs.getPeerId().c_str());  /* final line feed */
   
