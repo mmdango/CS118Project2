@@ -87,27 +87,27 @@ Client::run()
   servArgs->port = m_clientPort;
   servArgs->max_pending = 5;
   printf("got here");
-  status = pthread_create(&server, NULL, server_thread, servArgs);
-  if(status != 0)
-    err_abort(status, "Server thread");
+  //status = pthread_create(&server, NULL, server_thread, servArgs);
+  //if(status != 0)
+  //  err_abort(status, "Server thread");
   sleep(1);
   
   /*
    * Initiate a client transmission of data
-   */
+   *
   for (auto i = m_peers.begin(); i != m_peers.end(); i++) {
 
-      /* get client thread arguments */
+      // get client thread arguments 
       clntArgs = (struct client_args *)malloc(sizeof(struct client_args));
       clntArgs->port = i->port;
       memcpy(clntArgs->hostname, i->ip.c_str(), sizeof(*(i->ip.c_str())));
       
-      /* spawn new client thread */
+      //spawn new client thread 
       status = pthread_create(&client, NULL, client_thread_peer, clntArgs);
       if(status != 0)
         err_abort(status, "Client thread"); 
     }
-
+*/
     close(m_trackerSock);
     sleep(m_interval);
   }
