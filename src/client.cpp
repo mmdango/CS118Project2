@@ -290,7 +290,7 @@ Client::recvTrackerResponse()
   m_interval = trackerResponse.getInterval();
 
   if (m_isFirstRes) {
-    for (const auto& peer : peers) {
+    for (const auto& peer : m_peers) {
       std::cout << peer.ip << ":" << peer.port << std::endl;
     }
   }
