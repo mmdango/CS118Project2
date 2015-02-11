@@ -286,7 +286,7 @@ Client::recvTrackerResponse()
 
   TrackerResponse trackerResponse;
   trackerResponse.decode(dict);
-  const std::vector<PeerInfo>& peers = trackerResponse.getPeers();
+  m_peers = trackerResponse.getPeers();
   m_interval = trackerResponse.getInterval();
 
   if (m_isFirstRes) {
