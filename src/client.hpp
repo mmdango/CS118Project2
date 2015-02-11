@@ -80,6 +80,9 @@ public:
   static void *client_thread(void *args);
   static void *client_thread_peer(void *args);
 
+  static MetaInfo m_metaInfo;
+  static std::vector<PeerInfo> m_peers;
+  
 private:
   void
   loadMetaInfo(const std::string& torrent);
@@ -93,8 +96,6 @@ private:
   void
   recvTrackerResponse();
 
-  static MetaInfo m_metaInfo;
-  static std::vector<PeerInfo> m_peers;
 
 private:
   std::string m_trackerHost;
