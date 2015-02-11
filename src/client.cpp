@@ -454,8 +454,8 @@ void *Client::client_thread_peer(void *args)
   if((bytesRcvd=recv(sock, buf, MAX_BUF_LEN-1, 0)) <= 0)
     err_message("recv() failed or connection closed prematurely");
   
-  BufferPtr buf_ptr = std::make_shared<sbt::Buffer>(buf);
-  received_hs.decode(buf_ptr);
+  //BufferPtr buf_ptr = std::make_shared<sbt::Buffer>(buf);
+  //received_hs.decode(buf_ptr);
 
   printf("peerId:%s",received_hs.getPeerId().c_str());  /* final line feed */
   
