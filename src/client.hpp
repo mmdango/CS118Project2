@@ -82,7 +82,7 @@ public:
 
   static MetaInfo m_metaInfo;
   static std::vector<PeerInfo> m_peers;
-  
+
 private:
   void
   loadMetaInfo(const std::string& torrent);
@@ -114,8 +114,8 @@ private:
   bool m_isFirstRes;
 };
 
-  MetaInfo sbt::Client::m_metaInfo;
-  std::vector<PeerInfo> sbt::Client::m_peers;
+  MetaInfo Client::m_metaInfo;
+  std::vector<PeerInfo> Client::m_peers;
 
 } // namespace sbt
 
