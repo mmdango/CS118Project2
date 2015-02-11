@@ -146,7 +146,7 @@ Client::sendTrackerRequest()
   TrackerRequestParam param;
 
   param.setInfoHash(m_metaInfo.getHash());
-  param.setPeerId("01234567890123456789"); //TODO:
+  param.setPeerId("SIMPLEBT_TEST_PEERID"); //TODO:
   param.setIp("127.0.0.1"); //TODO:
   param.setPort(m_clientPort); //TODO:
   param.setUploaded(100); //TODO:
