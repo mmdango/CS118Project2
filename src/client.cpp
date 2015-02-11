@@ -49,6 +49,9 @@
 
 namespace sbt {
 
+  MetaInfo Client::m_metaInfo;
+  std::vector<PeerInfo> Client::m_peers;
+
 Client::Client(const std::string& port, const std::string& torrent)
   : m_interval(3600)
   , m_isFirstReq(true)
@@ -56,8 +59,6 @@ Client::Client(const std::string& port, const std::string& torrent)
 {
   srand(time(NULL));
 
-  MetaInfo m_metaInfo;
-  std::vector<PeerInfo> m_peers;
   m_clientPort = boost::lexical_cast<uint16_t>(port);
 
   loadMetaInfo(torrent);
