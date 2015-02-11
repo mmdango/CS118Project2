@@ -93,12 +93,13 @@ private:
   void
   recvTrackerResponse();
 
-private:
   static MetaInfo m_metaInfo;
+  static std::vector<PeerInfo> m_peers;
+
+private:
   std::string m_trackerHost;
   std::string m_trackerPort;
   std::string m_trackerFile;
-  static std::vector<PeerInfo> m_peers;
   
   uint16_t m_clientPort;
 
@@ -112,9 +113,9 @@ private:
   bool m_isFirstRes;
 };
 
+  MetaInfo sbt::Client::m_metaInfo;
+  std::vector<PeerInfo> sbt::Client::m_peers;
 
 } // namespace sbt
 
-  MetaInfo sbt::Client::m_metaInfo;
-  std::vector<PeerInfo> sbt::Client::m_peers;
 #endif // SBT_CLIENT_HPP
