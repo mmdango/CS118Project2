@@ -74,6 +74,7 @@ Client::run()
     sendTrackerRequest();
     m_isFirstReq = false;
     recvTrackerResponse();
+  printf("got here");
 
 
   int status;                    /* for pthread returns */
